@@ -1,6 +1,6 @@
 import { h, Component } from "zheleznaya";
 
-export const Html = ({ html }: {html: string}) => {
+export const Html: Component<{ html: string }> = ({ html }) => {
   return (
     <div ref={el => el.innerHTML = html} />
   );
