@@ -1,5 +1,4 @@
 import { Component, h } from "zheleznaya";
-import { Link } from "../Router";
 
 export const Footer: Component = () => {
   return (
