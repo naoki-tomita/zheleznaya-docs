@@ -28,7 +28,7 @@ async function markedAsync(md: string): Promise<string> {
 }
 
 export async function fetchMarkdown(path: string): Promise<void> {
-  if (path === ".md") path = "index.md";
+  if (path === "/.md") path = "index.md";
   const markdown = await fetch(`../articles/${path}`).then((it) =>
     it.ok ? it.text() : ""
   );
