@@ -1,4 +1,4 @@
-## what is zheleznaya?
+## This is preview environment.
 
 Zheleznaya is React like framework.
 
