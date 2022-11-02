@@ -17,8 +17,9 @@ async function readDirRecursively(root: string): Promise<string[]> {
 }
 
 
-const handler: Handler = async () => {
-  const files = await readDirRecursively("../../")
+const handler: Handler = async (req) => {
+  console.log(req.queryStringParameters?.path)
+  const files = await readDirRecursively(req.queryStringParameters?.path ?? "./")
 
   return {
     statusCode: 200,
