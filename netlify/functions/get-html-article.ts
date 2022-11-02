@@ -17,7 +17,7 @@ const handler: Handler = async () => {
 
   return {
     statusCode: 200,
-    body: JSON.stringify(await Promise.all(files.map(file => readFile(file).then(data => ({ file, data }))))),
+    body: JSON.stringify(await Promise.all(files.map(file => readFile(file).then(data => ({ file, data: data.toString("utf-8") }))))),
     headers: {
       "content-type": "application/json"
     }
