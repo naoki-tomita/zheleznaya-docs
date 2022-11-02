@@ -22,4 +22,4 @@ import { App } from "./App";
 render(<App />);
 ```
 
-#### [<- prev](#api-references)
+#### [<- prev](#api-references) / [next ->](#zstyl)
