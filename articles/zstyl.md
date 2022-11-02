@@ -37,3 +37,5 @@ render(
 );
 
 ```
+
+#### [<- prev](#component-api)
