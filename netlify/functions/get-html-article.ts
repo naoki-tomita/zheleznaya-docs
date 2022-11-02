@@ -13,7 +13,7 @@ async function readDirRecursively(root: string): Promise<string[]> {
 
 
 const handler: Handler = async () => {
-  const files = await readDirRecursively("./")
+  const files = await readDirRecursively("../")
 
   return {
     statusCode: 200,
