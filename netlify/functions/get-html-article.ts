@@ -13,11 +13,11 @@ async function readDirRecursively(root: string): Promise<string[]> {
 
 
 const handler: Handler = async () => {
-  const files = await readDirRecursively("../")
+  const files = await readDirRecursively("/")
 
   return {
     statusCode: 200,
-    body: JSON.stringify(await Promise.all(files.map(file => readFile(file).then(data => ({ file, data: data.toString("utf-8") }))))),
+    body: JSON.stringify(files),
     headers: {
       "content-type": "application/json"
     }
