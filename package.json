@@ -8,7 +8,7 @@
     "marked": "^3.0.4",
     "vite": "^2.5.10",
     "zheleznaya": "^0.1.19",
-    "zstyl": "^0.0.7"
+    "zstyl": "^0.1.4"
   },
   "scripts": {
     "dev": "vite .",

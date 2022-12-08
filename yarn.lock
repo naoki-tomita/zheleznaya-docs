@@ -119,9 +119,7 @@ zheleznaya@^0.1.19:
   resolved "https://registry.yarnpkg.com/zheleznaya/-/zheleznaya-0.1.19.tgz#5f46714f3f2f63a11d41f72f6276d4ca3a17700f"
   integrity sha512-VYLdqyG/p+6d0A9VgJIkk7kSza2xjJSBtpRKcn9ucF6EaJPJc815MxldHw3IaH9ZHeqXSJABqO8qKmP5iJutCQ==
 
-zstyl@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/zstyl/-/zstyl-0.0.7.tgz#af2cba906d9f9d602ed86a2a401fe7b6ceffd693"
-  integrity sha512-T1gttoOgMrvZcCx6CPzl5T9ep2U48l4tni/HuvSQAWApytJWMzphP310OV8k9FihEwzHlODZaXHVQTmLn56RYA==
-  dependencies:
-    zheleznaya "^0.1.19"
+zstyl@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/zstyl/-/zstyl-0.1.4.tgz#e2d689c830142580d6566075b5f700b09dca73c6"
+  integrity sha512-P7afBEB8OFdHql9EwSOWUyI6WD+2GvjkoaNVzurfOUEwImeyoP1bJ99yjIkaaIQ/knn4ePm3ae5X33kyhfvpDQ==
