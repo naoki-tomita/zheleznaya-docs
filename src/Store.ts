@@ -20,7 +20,7 @@ export function href(path: string) {
 }
 
 function scrollTop() {
-  setTimeout(() => window.scrollTo({ behavior: "auto", left: 0, top: 0 }), 100);
+  window.scrollTo({ behavior: "auto", left: 0, top: 0 });
 }
 
 async function markedAsync(md: string): Promise<string> {
@@ -36,5 +36,5 @@ export async function fetchMarkdown(path: string): Promise<void> {
     return fetchMarkdown("index.md");
   }
   store.html = await markedAsync(markdown);
-  setTimeout(() => (window as any).Prism.highlightAll(), 50);
+  (window as any).Prism.highlightAll();
 }
