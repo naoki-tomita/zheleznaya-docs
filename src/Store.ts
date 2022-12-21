@@ -31,9 +31,11 @@ function highlight(dom: HTMLElement) {
 export const store = createStore<{
   path: string;
   html: string;
+  loading: boolean;
 }>({
   path: location.hash.replace("#", ""),
   html: "",
+  loading: false,
 });
 onRouteChange((path) => {
   href(path);
@@ -56,19 +58,23 @@ async function markedAsync(md: string): Promise<string> {
 }
 
 export async function fetchMarkdown(path: string): Promise<void> {
+  store.loading = true;
   if (path === "/.md") {
-    location.hash = "#index"
+    location.hash = "#index";
+    store.loading = false;
     return;
   }
   const markdown = await fetch(`../articles/${path}`).then((it) =>
     it.ok ? it.text() : ""
   );
   if (!markdown) {
-    location.hash = "#index"
+    location.hash = "#index";
+    store.loading = false;
     return;
   }
   const html = document.createElement("div");
   html.innerHTML = await markedAsync(markdown);
   store.html = (await highlightAll(html)).innerHTML;
+  store.loading = false;
   scrollTop();
 }

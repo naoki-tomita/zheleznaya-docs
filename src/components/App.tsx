@@ -4,13 +4,14 @@ import { Content } from "./Content";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { Html } from "./Html";
+import { Loader } from "./Loader";
 
 export const App: Component = () => {
   return (
     <div>
       <Header />
       <Content>
-        <Html html={store.html} />
+        {store.loading ? <Loader/> : <Html html={store.html} />}
       </Content>
       <Footer />
     </div>
