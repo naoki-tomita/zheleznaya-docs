@@ -1,20 +1,48 @@
+import { match } from "assert";
 import marked from "marked";
 import { createStore } from "zheleznaya";
 import { onRouteChange } from "./Router";
+
+
+async function highlightAll(dom: HTMLElement) {
+  await Promise.all(
+    Array.from(dom.querySelectorAll(`pre > code`))
+      .map(async (it) => {
+        const matched = it.className.match(/language\-([a-z]*)/);
+        await loadLanguages(matched![1])
+        it.innerHTML = await highlight(it as any)
+      })
+  );
+  return dom;
+}
+
+function loadLanguages(language: string) {
+  return new Promise<void>((ok, ng) => {
+    (window as any).Prism.plugins.autoloader.loadLanguages(language, ok, ng);
+  });
+}
+
+function highlight(dom: HTMLElement) {
+  return new Promise<string>(ok => {
+    (window as any).Prism.highlightElement(dom, false, () => ok(dom.innerHTML));
+  });
+}
 
 export const store = createStore<{
   path: string;
   html: string;
 }>({
-  path: location.href.replace("#", ""),
+  path: location.hash.replace("#", ""),
   html: "",
 });
 onRouteChange((path) => {
   href(path);
-  scrollTop();
 });
 fetchMarkdown(`${store.path}.md`);
 export function href(path: string) {
+  if (path === store.path) {
+    return;
+  }
   store.path = path;
   fetchMarkdown(`${path}.md`);
 }
@@ -28,13 +56,19 @@ async function markedAsync(md: string): Promise<string> {
 }
 
 export async function fetchMarkdown(path: string): Promise<void> {
-  if (path === "/.md") path = "index.md";
+  if (path === "/.md") {
+    location.hash = "#index"
+    return;
+  }
   const markdown = await fetch(`../articles/${path}`).then((it) =>
     it.ok ? it.text() : ""
   );
   if (!markdown) {
-    return fetchMarkdown("index.md");
+    location.hash = "#index"
+    return;
   }
-  store.html = await markedAsync(markdown);
-  (window as any).Prism.highlightAll();
+  const html = document.createElement("div");
+  html.innerHTML = await markedAsync(markdown);
+  store.html = (await highlightAll(html)).innerHTML;
+  scrollTop();
 }
