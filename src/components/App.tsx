@@ -11,9 +11,9 @@ export const App: Component = () => {
     <div>
       <Header />
       <Content>
-        {store.loading ? <Loader/> : <Html html={store.html} />}
+        {store.loading ? <Loader /> : <Html html={store.html} />}
       </Content>
       <Footer />
     </div>
   );
-}
+};

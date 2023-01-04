@@ -37,7 +37,6 @@ const Spinner = styled`
 
 `;
 
-
 export const Loader: Component = () => {
   return (
     <Spinner>
@@ -46,4 +45,4 @@ export const Loader: Component = () => {
       <div class="bounce3"></div>
     </Spinner>
   );
-}
+};

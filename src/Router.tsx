@@ -9,10 +9,10 @@ export function onRouteChange(cb: RouteCallback) {
 }
 
 function emit() {
-  cbs.forEach(it => it(location.hash.replace("#", "")));
+  cbs.forEach((it) => it(location.hash.replace("#", "")));
 }
 
-window.addEventListener("hashchange", _ => emit());
+window.addEventListener("hashchange", (_) => emit());
 
 const A = styled.a`
   color: inherit;
@@ -20,9 +20,5 @@ const A = styled.a`
 `;
 
 export const Link: Component = ({ href }: { href: string }, children) => {
-  return (
-    <A href={`#${href}`}>
-      {children}
-    </A>
-  );
-}
+  return <A href={`#${href}`}>{children}</A>;
+};
