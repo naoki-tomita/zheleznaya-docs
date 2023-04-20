@@ -9,7 +9,7 @@ import { Loader } from "./Loader";
 export const App: Component = () => {
   return (
     <div>
-      <Header />
+      <Header title={`${store.title} | zheleznaya docs`} />
       <Content>
         {store.loading ? <Loader /> : <Html html={store.html} />}
       </Content>

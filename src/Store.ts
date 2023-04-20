@@ -5,10 +5,12 @@ import { onRouteChange } from "./Router";
 
 export const store = createStore<{
   path: string;
+  title: string;
   html: string;
   loading: boolean;
 }>({
   path: location.hash.replace("#", ""),
+  title: "zheleznaya document",
   html: "",
   loading: false,
 });
@@ -39,15 +41,16 @@ export async function loadMakdown(path: string): Promise<void> {
   }
   store.loading = true;
   try {
-    const markdown = await fetch(`../articles/${path}`).then((it) =>
-      it.ok ? it.text() : ""
-    );
+    const markdown = await fetch(`../articles/${path}`)
+      .then(it => it.ok ? it.text() : "")
+      .then(it => it.trim());
     if (!markdown) {
       location.hash = "#index";
       return;
     }
     const html = document.createElement("div");
     html.innerHTML = await markedAsync(markdown);
+    store.title = markdown.slice(0, markdown.indexOf("\n")).replaceAll("#", "")
     store.html = (await highlightAll(html)).innerHTML;
   } finally {
     store.loading = false;
