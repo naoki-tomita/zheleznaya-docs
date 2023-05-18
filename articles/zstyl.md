@@ -31,7 +31,7 @@ const Header = styled<{
 `;
 
 render(
-  <Header>
+  <Header color="blue">
     <div class="inner">200px height</div>
   </Header>
 );
