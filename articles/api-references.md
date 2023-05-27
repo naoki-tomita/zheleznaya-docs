@@ -25,7 +25,7 @@ function h(name: Component | string, attributes: any | null, ...children: Array<
 
 See: [`React.createElement`](https://github.com/hyperhype/hyperscript)
 
-### `createState`, `getState`
+### `createStore`, `getStore`, `useStore`
 
 Create store instance or get store instance.
 
@@ -36,7 +36,30 @@ Store instance is wrapped by reactive object. But you can use like standard js o
 ```ts
 function createStore<T>(obj: T): T
 function getStore<T>(): T
+function useStore<T>(obj: T): T
 ```
 
+### `createEffect`
+
+Create effect function. You can add effect when rendering component.
+
+```ts
+type EffectFn = () => void
+function createEffect(): EffectFn
+```
+
+#### How to use `createEffect`
+```ts
+const effect = createEffect();
+const App = () => {
+  effect(() => {
+    // something loading or set store.
+  });
+  
+  return (
+    <div>{store.fetchedData}</div>
+  );
+}
+```
 
 #### [<- prev](#installation) / [next ->](#component-api)
