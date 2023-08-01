@@ -44,9 +44,12 @@ function useStore<T>(obj: T): T
 Create effect function. You can add effect when rendering component.
 
 ```ts
-type EffectFn = () => void
+type EffectFn = (effect: () => void, watcher: any[]) => void
 function createEffect(): EffectFn
 ```
+
+* `effect`: Some executable effect.
+* `watcher`: The effect is executed when one of the variables specified here is changed.
 
 #### How to use `createEffect`
 ```ts
@@ -54,8 +57,8 @@ const effect = createEffect();
 const App = () => {
   effect(() => {
     // something loading or set store.
-  });
-  
+  }, []);
+
   return (
     <div>{store.fetchedData}</div>
   );
