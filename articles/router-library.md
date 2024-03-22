@@ -24,7 +24,7 @@ const App = () => {
         // you can define path and component
         "/": () => <div>Top</div>
         // path can includes path parameter.
-        "/path/to/:id": (id) => <div>{id}</div>
+        "/path/to/:id": ({id}) => <div>{id}</div>
       }}
       error={() => <div>404 error</div>}
     />
