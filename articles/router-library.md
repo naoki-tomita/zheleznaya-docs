@@ -8,8 +8,10 @@ You can use [`@kojiro.ueda/zrouter`](https://www.npmjs.com/package/@kojiro.ueda/
 #### how to use
 
 ```tsx
-import { h, createStore } from "zheleznaya";
+import { h, createRoot } from "zheleznaya";
 import { createRouter, PathStrategy } from "@kojiro.ueda/zrouter";
+
+const { render, createStore } = createRoot();
 
 const store = createStore({
   path: location.pathname, // You must set path on root of store.
@@ -30,6 +32,8 @@ const App = () => {
     />
   );
 }
+
+render(<App />);
 ```
 
-#### [<- prev](#zstyl)
+#### [<- prev](#zstyl) / [next ->](#migration)

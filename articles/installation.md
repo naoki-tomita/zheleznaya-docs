@@ -8,10 +8,12 @@
 > mkdir zheleznaya-app
 > cd zheleznaya-app
 > yarn init
-> yarn add zheleznaya typescript parcel
-> touch index.html index.tsx
-> yarn tsc --init
+> yarn add zheleznaya
+> yarn add -D vite typescript
+> touch index.html index.tsx tsconfig.json
 ```
+
+> zheleznaya is an ES module only package. Use a bundler that supports ES modules, such as [Vite](https://vite.dev/).
 
 #### 2. Write `index.html`.
 
@@ -24,7 +26,7 @@
   <title>app</title>
 </head>
 <body>
-  <script src="index.tsx"></script>
+  <script type="module" src="./index.tsx"></script>
 </body>
 </html>
 ```
@@ -32,35 +34,44 @@
 #### 3. Write `index.tsx`
 
 ```tsx
-import { h, Component } from "zheleznaya";
+import { h, createRoot } from "zheleznaya";
 
-const App: Component = () => {
+const { render } = createRoot();
+
+const App = () => {
   return (
     <h1>Hello zheleznaya!</h1>
   );
 }
 
-render(<App />)
+render(<App />);
 ```
 
-#### 4. Edit `tsconfig.json`
+#### 4. Write `tsconfig.json`
 
-Add this entry in `compilerOptions`.
+`jsx` and `jsxFactory` are required. Vite reads them as well.
 
 ```json
 {
-  "jsx": "react",
-  "jsxFactory": "h"
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": ["esnext", "dom"],
+    "strict": true,
+    "jsx": "react",
+    "jsxFactory": "h"
+  }
 }
 ```
 
 #### 5. Run dev server
 
 ```bash
-> yarn parcel index.html
+> yarn vite
 ```
 
-You can see application on `http://localhost:1234`
+You can see application on `http://localhost:5173`
 
 
 #### [<- prev](#index) / [next ->](#api-references)

@@ -1,4 +1,5 @@
-import { h, Component } from "zheleznaya";
+import { h } from "zheleznaya";
+import type { Component } from "../Types";
 import { styled } from "zstyl";
 
 const Spinner = styled`

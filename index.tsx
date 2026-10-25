@@ -1,4 +1,5 @@
-import { render, h } from "zheleznaya";
+import { h } from "zheleznaya";
+import { render } from "./src/Root";
 import { App } from "./src/components/App";
 import * as Sentry from "@sentry/browser";
 

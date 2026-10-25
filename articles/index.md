@@ -9,21 +9,23 @@ You can write app by ultra simple code.
 This documentation written by `zheleznaya`.
 
 ```tsx
-import { h, render, createStore, Component } from "zheleznaya";
+import { h, createRoot } from "zheleznaya";
 
-const store = createStore<{ name: string }>({ text: "" });
+const { render, createStore } = createRoot();
 
-const Greet: Component<{ name: string }> = ({ name }) => {
+const store = createStore({ name: "" });
+
+const Greet = ({ name }: { name: string }) => {
   return (
     <h1>Hello {name}!</h1>
   );
 }
 
-const App: Component = () => {
+const App = () => {
   return (
     <div>
-      <input onChange={el => (store.text = el.target.value)} />
-      <Greet name={store.text} />
+      <input oninput={(e: Event) => (store.name = (e.target as HTMLInputElement).value)} />
+      <Greet name={store.name} />
     </div>
   );
 }
@@ -32,5 +34,7 @@ render(<App />);
 ```
 
 > Zheleznaya is not production yet.
+
+> Upgrading from 0.2? See [migration guide](#migration).
 
 #### [next ->](#installation)
