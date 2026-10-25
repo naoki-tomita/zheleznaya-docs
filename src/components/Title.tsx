@@ -1,4 +1,5 @@
-import { h, Component } from "zheleznaya";
+import { h } from "zheleznaya";
+import type { Component } from "../Types";
 let title: HTMLTitleElement = globalThis?.document?.querySelector("title")!;
 
 export const Title: Component<{ label: string }> = ({ label }) => {

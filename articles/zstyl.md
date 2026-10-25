@@ -11,8 +11,10 @@ You can use [`zstyl`](https://www.npmjs.com/package/zstyl).
 You can write like styled-components or emotion.
 
 ```tsx
-import { h, render } from "zheleznaya";
+import { h, createRoot } from "zheleznaya";
 import { styled, css } from "zstyl";
+
+const { render } = createRoot();
 
 // styled-component style.
 const Header = styled<{

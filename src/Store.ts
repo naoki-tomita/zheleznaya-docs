@@ -1,5 +1,5 @@
-import marked from "marked";
-import { createStore } from "zheleznaya";
+import { marked } from "marked";
+import { createStore } from "./Root";
 import { highlightAll } from "./Prism";
 import { HashStrategy, createRouter } from "@kojiro.ueda/zrouter";
 
@@ -14,6 +14,11 @@ export const store = createStore<{
   html: "",
   loading: false,
 });
+
+// Only the latest load may finish loading: Html is rendered only once loading
+// finishes, so finishing an outdated load would show an empty page.
+let latestLoad = 0;
+
 const router = createRouter(store, HashStrategy);
 router.onRouteChange(() => href(store.path.replace("#", "")));
 
@@ -27,11 +32,8 @@ function scrollTop() {
   window.scrollTo({ behavior: "auto", left: 0, top: 0 });
 }
 
-async function markedAsync(md: string): Promise<string> {
-  return new Promise((ok) => marked(md, (_, d) => ok(d)));
-}
-
 export async function loadMakdown(path: string): Promise<void> {
+  const load = ++latestLoad;
   store.loading = true;
   try {
     const markdown = await fetch(`../articles/${path}`)
@@ -42,11 +44,13 @@ export async function loadMakdown(path: string): Promise<void> {
       return;
     }
     const html = document.createElement("div");
-    html.innerHTML = await markedAsync(markdown);
+    html.innerHTML = await marked.parse(markdown);
     store.title = markdown.slice(0, markdown.indexOf("\n")).replaceAll("#", "")
     store.html = (await highlightAll(html)).innerHTML;
   } finally {
-    store.loading = false;
+    if (load === latestLoad) {
+      store.loading = false;
+    }
   }
   scrollTop();
 }

@@ -1,4 +1,5 @@
-import { Component, h } from "zheleznaya";
+import { h } from "zheleznaya";
+import type { Component } from "../Types";
 
 export const Footer: Component = () => {
   return (
